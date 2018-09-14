@@ -1,4 +1,6 @@
-Ensimmäinen viikko. Projektin aloitus, johon kuului aiheen rajaus, rakenteen hahmottelu, tarvittavien liitännäisten tutkiminen,
+# Ensimmäinen viikko:
+
+Projektin aloitus, johon kuului aiheen rajaus, rakenteen hahmottelu, tarvittavien liitännäisten tutkiminen,
 sekä mavenin asennus ohjeiden mukaisesti. Loin myös luokat, joista aloitin jo Noden, Pathin sekä DFS ja BFS haut. Kirjoitin
 nopean mainin, jossa testasin, että toimivat. Ainakin tällä hetkellä vaikuttaisi, että toimivat jopa oikeasti. Tämän viikon
 asiat olivat sen verran helppoja ja nopeita, etten vielä oppinut paljoa uutta. Sen ehkä, että aion tehdä näillä näkymin valikon
