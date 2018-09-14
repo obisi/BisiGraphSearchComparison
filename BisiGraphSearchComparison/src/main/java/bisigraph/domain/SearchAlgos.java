@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bisigraph;
+package bisigraph.domain;
 
 import java.util.LinkedList;
 
@@ -15,6 +15,7 @@ public class SearchAlgos {
 
     public Path DFS(Node start, Node goal) {
         Path path = new Path(start, null);
+        start.visit();
         LinkedList<Path> que = new LinkedList<Path>();
         que.add(path);
         while (!que.isEmpty()) {
@@ -26,6 +27,9 @@ public class SearchAlgos {
             for (Node n : neighbors) {
                 if (n!=null &&!n.visited()) {
                     Path pt = new Path(n, p);
+                    int[] xy = pt.getNode().getXY();
+                    int[] xy2 = p.getNode().getXY();
+                    System.out.println("Node " + xy[0] +","+ xy[1] + " type: " + pt.getNode().getType() + " prev: " + "Node " + xy2[0] +","+ xy2[1] + " type: " + p.getNode().getType());
                     que.add(pt);
                     n.visit();
                 }
@@ -36,6 +40,7 @@ public class SearchAlgos {
 
     public Path BFS(Node start, Node goal) {
         Path path = new Path(start, null);
+        start.visit();
         LinkedList<Path> que = new LinkedList<Path>();
         que.add(path);
         while (!que.isEmpty()) {
@@ -47,6 +52,9 @@ public class SearchAlgos {
             for (Node n : neighbors) {
                 if (n != null && !n.visited()) {
                     Path pt = new Path(n, p);
+                    int[] xy = pt.getNode().getXY();
+                    int[] xy2 = p.getNode().getXY();
+                    System.out.println("Node " + xy[0] +","+ xy[1] + " type: " + pt.getNode().getType() + " prev: " + "Node " + xy2[0] +","+ xy2[1] + " type: " + p.getNode().getType());
                     que.add(pt);
                     n.visit();
                 }

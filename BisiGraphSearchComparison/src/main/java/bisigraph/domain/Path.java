@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bisigraph;
+package bisigraph.domain;
 
 /**
  *
@@ -25,6 +25,14 @@ public class Path {
 
     public Node getNode() {
         return node;
+    }
+    
+    @Override
+    public String toString(){
+        int[] xy = node.getXY();
+        String x = Integer.toString(xy[0]);
+        String y = Integer.toString(xy[1]);
+        return x + "," + y +": " +Integer.toString(node.getType());
     }
 }
 

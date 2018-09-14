@@ -3,49 +3,80 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bisigraph;
+package bisigraph.domain;
+import java.awt.Color;
 
-import java.util.Objects;
 
 /**
  *
  * @author bisi
  */
-public class Node {
+public class Node{
 
-    // 0=empty, 1=goal, 2=start, 3=wall
-    private int type;
+   private Color color;
+   private int type;
+   private int x;
+   private int y;
+   private boolean visited;
+   private Node[] neighbors;
 
-    private int x;
-    private int y;
-    private boolean visited;
+   public Node(int x, int y) {
+      type = 0;
+      this.color = Color.lightGray;
+      this.x = x;
+      this.y = y;
+      this.neighbors = new Node[4];
+      visited = false;
+      
+   }
     
-    // muuttuja värille, jotta voi pitää yllä piirrosta.
+   public Color getColor() {
+      return color;
+   }
 
-    private Node[] neighbors;
+   public int getType() {
+      return type;
+   }
 
-    public Node(int type, int x, int y) {
-        this.type = type;
-        this.x = x;
-        this.y = y;
-        this.neighbors = new Node[4];
-        visited = false;
-    }
-
-    public int getType() {
-        return type;
-    }
-    
+   @Override
+   public String toString() {
+      return Integer.toString(type);
+   }
+   
     public void setWall() {
         type = 3;
+        color = Color.BLACK;
     }
-    
+
     public void setGoal() {
         type = 1;
+        color = Color.RED;
     }
-    
+
     public void setStart() {
         type = 2;
+        color = Color.WHITE;
+    }
+
+    public void setEmpty() {
+        type = 0;
+        color = Color.lightGray;
+    }
+    
+    public void setPath() {
+        type = 5;
+        color = Color.CYAN;
+    }
+    
+    public void setInLine(){
+        type = 4;
+        color = Color.darkGray;
+    }
+    
+    public void setVisited(){
+        visited = true;
+        type = 6;
+        color = Color.GRAY;
     }
 
     public Node[] getNeighbors() {
@@ -58,6 +89,11 @@ public class Node {
     
     public boolean visited(){
         return visited;
+    }
+    
+    public int[] getXY(){
+        int[] xy = {this.x, this.y};
+        return xy;
     }
 
 
@@ -86,6 +122,9 @@ public class Node {
 
 
     public void setNeighbor(Node n) {
+        if(n.type == 3){
+            return;
+        }
         for(int i = 0; i<4; i++){
             if(neighbors[i] == null){
                 neighbors[i] = n;
@@ -93,7 +132,5 @@ public class Node {
             }
         }
     }
-    
-    
-    
+
 }
