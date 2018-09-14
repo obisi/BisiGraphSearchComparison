@@ -19,3 +19,5 @@ Testauksen alkeet opin ainakin tällä viikolla, kun sitä en ollut aiemmin tehn
 että piirtäminen on niin nopeaa (tietenkin), ettei ihmissilmä ehdi huomata pikselien vaihtumista. Olisi pitänyt tajuta jo aiemmin.
 
 Ensi viikolla voisi olla aika lisätä Astar ja lisäksi parannella testejä, dokumentoida koodia, sekä selventää ohjelman rakennetta.
+
+Käytetty aika: n. 7h. Dokumentaatio n.0,5h, testaukset 2h, 4-5h muuhun koodaukseen.
