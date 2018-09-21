@@ -20,7 +20,12 @@ public class Node{
    private boolean visited;
    private Node[] neighbors;
 
-   public Node(int x, int y) {
+    /**
+     * Node object, default type is unvisited and empty
+     * @param x set x-coordinate
+     * @param y set y-coordinate
+     */
+    public Node(int x, int y) {
       type = 0;
       this.color = Color.lightGray;
       this.x = x;
@@ -30,12 +35,34 @@ public class Node{
       
    }
     
-   public Color getColor() {
+    /**
+     *
+     * @return color of the Node
+     */
+    public Color getColor() {
       return color;
    }
 
-   public int getType() {
-      return type;
+    /**
+     *
+     * @return String value of the object type
+     */
+    public String getType() {
+      if(type == 0){
+          return "Empty";
+      } else if(type == 1){
+          return "Goal";
+      } else if(type == 2){
+          return "Start";
+      } else if(type == 3){
+          return "Wall";
+      } else if(type == 4){
+          return "in Line";
+      } else if(type == 5){
+          return "Path";
+      } else{
+          return "Visited";
+      }
    }
 
    @Override
@@ -43,54 +70,90 @@ public class Node{
       return Integer.toString(type);
    }
    
+    /**
+     * Sets the Node to wall-type
+     */
     public void setWall() {
         type = 3;
         color = Color.BLACK;
     }
 
+    /**
+     * Sets the Node to goal-type
+     */
     public void setGoal() {
         type = 1;
         color = Color.RED;
     }
 
+    /**
+     * Sets the Node to start-type
+     */
     public void setStart() {
         type = 2;
         color = Color.WHITE;
     }
 
+    /**
+     * Sets the Node to empty-type
+     */
     public void setEmpty() {
         type = 0;
         color = Color.lightGray;
     }
     
+    /**
+     * Sets the Node to path-type
+     */
     public void setPath() {
         type = 5;
         color = Color.CYAN;
     }
     
+    /**
+     * Sets the Node to inLine-type
+     */
     public void setInLine(){
         type = 4;
         color = Color.darkGray;
     }
     
+    /**
+     * Sets the Node to visited-type
+     */
     public void setVisited(){
         visited = true;
         type = 6;
         color = Color.GRAY;
     }
 
+    /**
+     * Returns a size four array of neighbors.
+     * @return Node[]
+     */
     public Node[] getNeighbors() {
         return this.neighbors;
     }
     
+    /**
+     * set visited value to true
+     */
     public void visit(){
         visited = true;
     }
     
+    /**
+     * Return whether node is visited.
+     * @return boolean
+     */
     public boolean visited(){
         return visited;
     }
     
+    /**
+     * Returns int[2] array of x and y coordinate
+     * @return int[]
+     */
     public int[] getXY(){
         int[] xy = {this.x, this.y};
         return xy;
@@ -110,6 +173,11 @@ public class Node{
         return hash;
     }
     
+    /**
+     * Check if the x,y coordinates are the same
+     * @param Node to compare to
+     * @return boolean
+     */
     public boolean equals(Node n) {
         if (this.x != n.x) {
             return false;
@@ -120,7 +188,10 @@ public class Node{
         return true;
     }
 
-
+    /**
+     * Sets a new neighbor if the node is not wall type.
+     * @param Node
+     */
     public void setNeighbor(Node n) {
         if(n.type == 3){
             return;

@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test.domain;
+package test.datastructures;
 
-import bisigraph.domain.Node;
-import bisigraph.domain.Path;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,12 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author bisi
  */
-public class PathTest {
+public class BisiStackTest {
     
-    private Path path;
-    private Path prev;
-    
-    public PathTest() {
+    public BisiStackTest() {
     }
     
     @BeforeClass
@@ -36,26 +31,15 @@ public class PathTest {
     
     @Before
     public void setUp() {
-        prev = new Path(new Node(0,0), null, 1);
-        path = new Path(new Node(0,1), prev, 1);
     }
     
     @After
     public void tearDown() {
     }
 
-
-    @Test
-    public void getPreviousTest() {
-        assertEquals(path.getPrevious(), prev);
-    }
-    
-    @Test
-    public void getNodeTest() {
-        assertEquals(path.getNode().equals(new Node(0, 1)), true);
-    }
-    @Test
-    public void toStringTest() {
-        assertEquals(path.toString(), "0,1: 0");
-    }
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
 }

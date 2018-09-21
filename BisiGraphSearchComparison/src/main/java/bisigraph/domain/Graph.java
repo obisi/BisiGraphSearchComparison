@@ -5,6 +5,8 @@
  */
 package bisigraph.domain;
 
+import bisigraph.datastructures.BisiQueue;
+import bisigraph.datastructures.BisiStack;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.LinkedList;
@@ -25,6 +27,12 @@ public class Graph extends JPanel {
     
     private MyMouseListener myListener;
 
+    /**
+     * Builds two new graphs, one for GUI and one for searches. Parameters are height and width of the graph, and the width of a cell of the gui graph.
+     * @param x width
+     * @param y height
+     * @param cellWidth width of the cell in gui
+     */
     public Graph(int x, int y, int cellWidth) {
         goal[0] = -1;
         goal[1] = -1;
@@ -53,20 +61,23 @@ public class Graph extends JPanel {
         }
     }
     
+    /**
+     * Sets neightbours for the search graph
+     */
     public void setNeighbors() {
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph[0].length; j++) {
-                if (graph[i][j].getType() != 3) {
-                    if (i > 0 && !graph[i - 1][j].visited() && graph[i - 1][j].getType() != 3) {
+                if (!"Wall".equals(graph[i][j].getType())) {
+                    if (i > 0 && !graph[i - 1][j].visited() && !"Wall".equals(graph[i - 1][j].getType())) {
                         graph[i][j].setNeighbor(graph[i - 1][j]);
                     }
-                    if (i < graph.length - 1 && !graph[i + 1][j].visited() && graph[i + 1][j].getType() != 3) {
+                    if (i < graph.length - 1 && !graph[i + 1][j].visited() && !"Wall".equals(graph[i + 1][j].getType())) {
                         graph[i][j].setNeighbor(graph[i + 1][j]);
                     }
-                    if (j > 0 && !graph[i][j - 1].visited() && graph[i][j - 1].getType() != 3) {
+                    if (j > 0 && !graph[i][j - 1].visited() && !"Wall".equals(graph[i][j - 1].getType())) {
                         graph[i][j].setNeighbor(graph[i][j - 1]);
                     }
-                    if (j < graph[0].length - 1 && !graph[i][j + 1].visited() && graph[i][j + 1].getType() != 3) {
+                    if (j < graph[0].length - 1 && !graph[i][j + 1].visited() && !"Wall".equals(graph[i][j + 1].getType())) {
                         graph[i][j].setNeighbor(graph[i][j + 1]);
                     }
                 }
@@ -76,6 +87,14 @@ public class Graph extends JPanel {
     }
     
     // 
+
+    /**
+     * function to set goal and start for testing purposes.
+     * @param x1 goal x
+     * @param y1 goal y
+     * @param x2 start x
+     * @param y2 start y
+     */
     
     public void testSet(int x1, int y1, int x2, int y2){
         goal[0] = x1;
@@ -84,35 +103,62 @@ public class Graph extends JPanel {
         start[1] = y2;
     }
     
+    /**
+     * Returns the coordinates for the start node
+     * @return int[], [0] = x, [1] = y
+     */
     public Node getStart(){
         return graph[start[0]][start[1]];
     }
+
+    /**
+    * Returns the coordinates for the goal node
+     * @return int[], [0] = x, [1] = y
+     */
     public Node getGoal(){
         return graph[goal[0]][goal[1]];
     }
 
+    /**
+     * Returns the search graph
+     * @return Graph[][]
+     */
     public Node[][] getGraph() {
         return graph;
     }
     
-    
+    /**
+     * gui functionality for choosing goal node
+     */
     public void setGoal(){
        myListener.setGoal();
     }
     
+    /**
+     * gui functionality for choosing start node
+     */
     public void setStart(){
         myListener.setStart();
     }
     
+    /**
+     * gui functionality for choosing wall nodes
+     */
     public void setWall(){
         myListener.setWall();
     }
     
+    /**
+     * gui functionality for choosing empty nodes
+     */
     public void setEmpty(){
         myListener.setEmpty();
     }
 
-
+    /**
+     * Function for GUI, user can choose goal node after button is pressed
+     * @param label
+     */
     public void labelPressedGoal(JLabel label) {
         for (int i = 0; i < myLabels.length; i++) {
             for (int j = 0; j < myLabels[i].length; j++) {
@@ -133,6 +179,10 @@ public class Graph extends JPanel {
         }
     }
 
+    /**
+     * Function for GUI, user can choose start node after button is pressed
+     * @param label
+     */
     public void labelPressedStart(JLabel label) {
         for (int i = 0; i < myLabels.length; i++) {
             for (int j = 0; j < myLabels[i].length; j++) {
@@ -153,6 +203,10 @@ public class Graph extends JPanel {
         }
     }
 
+    /**
+     * Function for GUI, user can choose wall nodes after button is pressed
+     * @param label
+     */
     public void labelPressedWall(JLabel label) {
         for (int i = 0; i < myLabels.length; i++) {
             for (int j = 0; j < myLabels[i].length; j++) {
@@ -166,6 +220,10 @@ public class Graph extends JPanel {
         }
     }
 
+    /**
+     * Function for GUI, user can choose empty nodes after button is pressed
+     * @param label
+     */
     public void labelPressedEmpty(JLabel label) {
         for (int i = 0; i < myLabels.length; i++) {
             for (int j = 0; j < myLabels[i].length; j++) {
@@ -179,6 +237,9 @@ public class Graph extends JPanel {
         }
     }
     
+    /**
+     * Updates colors in the GUI graph
+     */
     public void updateColor(){
         for(int i = 0; i<myLabels.length;i++){
             for(int j = 0; j<myLabels[0].length;j++){
@@ -187,6 +248,9 @@ public class Graph extends JPanel {
         }
     }
     
+    /**
+     * Test function, sets every cell to black and all nodes to walls
+     */
     public void wallify() {
         
         for (int i = 0; i < myLabels.length; i++) {
@@ -198,6 +262,9 @@ public class Graph extends JPanel {
 
     }
     
+    /**
+     * Resets the graph to empty and light grey *DOES NOT WORK PROPERLY YET*
+     */
     public void reset() {
         goal[0] = -1;
         goal[1] = -1;
@@ -213,15 +280,18 @@ public class Graph extends JPanel {
 
     }
 
-
+    /**
+     * DFS, returns a path to goal node from the start node
+     * @return Path
+     */
     public Path DFS() {
         setNeighbors();
-        Path path = new Path(graph[start[0]][start[1]], null);
+        Path path = new Path(graph[start[0]][start[1]], null, 0);
         graph[start[0]][start[1]].visit();
-        LinkedList<Path> que = new LinkedList<Path>();
-        que.add(path);
-        while (!que.isEmpty()) {
-            Path p = que.pollLast();
+        BisiStack stack = new BisiStack();
+        stack.add(path);
+        while (!stack.isEmpty()) {
+            Path p = stack.poll();
             if (p.getNode().equals(graph[goal[0]][goal[1]])) {
                 drawPath(p);
             }
@@ -232,8 +302,8 @@ public class Graph extends JPanel {
             for (Node n : neighbors) {
                 if (n != null && !n.visited()) {
                     n.setInLine();
-                    Path pt = new Path(n, p);
-                    que.add(pt);
+                    Path pt = new Path(n, p, p.getDistance()+1);
+                    stack.add(pt);
                     xy = pt.getNode().getXY();
                     myLabels[xy[0]][xy[1]].setBackground(pt.getNode().getColor());
                     n.visit();
@@ -243,14 +313,18 @@ public class Graph extends JPanel {
         return null;
     }
 
+    /**
+     * BFS, returns the shortest path to goal node from the start node
+     * @return
+     */
     public Path BFS() {
         setNeighbors();
-        Path path = new Path(graph[start[0]][start[1]], null);
+        Path path = new Path(graph[start[0]][start[1]], null, 0);
         graph[start[0]][start[1]].visit();
-        LinkedList<Path> que = new LinkedList<Path>();
+        BisiQueue que = new BisiQueue();
         que.add(path);
         while (!que.isEmpty()) {
-            Path p = que.pollFirst();
+            Path p = que.poll();
             if (p.getNode().equals(graph[goal[0]][goal[1]])) {
                 drawPath(p);
             }
@@ -261,7 +335,7 @@ public class Graph extends JPanel {
             for (Node n : neighbors) {
                 if (n != null && !n.visited()) {
                     n.setInLine();
-                    Path pt = new Path(n, p);
+                    Path pt = new Path(n, p, p.getDistance()+1);
                     que.add(pt);
                     xy = pt.getNode().getXY();
                     myLabels[xy[0]][xy[1]].setBackground(pt.getNode().getColor());
@@ -272,6 +346,10 @@ public class Graph extends JPanel {
         return null;
     }
 
+    /**
+     * Draws out the found path from start to goal.
+     * @param p
+     */
     public void drawPath(Path p) {
         updateColor();
         while (p.getPrevious() != null) {

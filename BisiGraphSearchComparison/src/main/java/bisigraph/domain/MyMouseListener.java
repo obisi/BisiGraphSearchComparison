@@ -40,23 +40,41 @@ public class MyMouseListener extends MouseAdapter {
        }
    }
    
-   public void setAllFalse(){
+    /**
+     * Sets all boolean valued controls to false
+     */
+    public void setAllFalse(){
        goal = false;
        start = false;
        wall = false;
        empty = false;
    }
    
-   public void setGoal(){
+    /**
+     * Sets goal value to true, so a new goal can be selected from gui
+     */
+    public void setGoal(){
        goal = true;
    }
-   public void setStart(){
+
+    /**
+     * Sets start value to true, so a new start point can be selected from gui
+     */
+    public void setStart(){
        start = true;
    }
-   public void setWall(){
+
+    /**
+     * Sets wall value to true, so new walls can be selected from gui
+     */
+    public void setWall(){
        wall = true;
    }
-   public void setEmpty(){
+
+    /**
+     * Sets empty value to true, so selected squares can be emptied can be selected from gui
+     */
+    public void setEmpty(){
        empty = true;
    }
    
