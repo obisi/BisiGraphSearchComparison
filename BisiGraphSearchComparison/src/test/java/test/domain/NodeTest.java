@@ -54,7 +54,7 @@ public class NodeTest {
 
     @Test
     public void getTypeTest() {
-        assertEquals(node.getType(), 0);
+        assertEquals(node.getType(), "Empty");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class NodeTest {
     public void setWallTest() {
         node.setWall();
         assertEquals(node.getColor(), Color.BLACK);
-        assertEquals(node.getType(), 3);
+        assertEquals(node.getType(), "Wall");
         
 
     }
@@ -75,42 +75,42 @@ public class NodeTest {
     public void setGoalTest() {
         node.setGoal();
         assertEquals(node.getColor(), Color.RED);
-        assertEquals(node.getType(), 1);
+        assertEquals(node.getType(), "Goal");
     }
 
     @Test
     public void setStartTest() {
         node.setStart();
         assertEquals(node.getColor(), Color.WHITE);
-        assertEquals(node.getType(), 2);
+        assertEquals(node.getType(), "Start");
     }
 
     @Test
     public void setEmptyTest() {
         node.setEmpty();
         assertEquals(node.getColor(), Color.lightGray);
-        assertEquals(node.getType(), 0);
+        assertEquals(node.getType(), "Empty");
     }
 
     @Test
     public void setPathTest() {
         node.setPath();
         assertEquals(node.getColor(), Color.CYAN);
-        assertEquals(node.getType(), 5);
+        assertEquals(node.getType(), "Path");
     }
 
     @Test
     public void setInLineTest() {
         node.setInLine();
         assertEquals(node.getColor(), Color.darkGray);
-        assertEquals(node.getType(), 4);
+        assertEquals(node.getType(), "in Line");
     }
 
     @Test
     public void setVisitedTest() {
         node.setVisited();
         assertEquals(node.getColor(), Color.GRAY);
-        assertEquals(node.getType(), 6);
+        assertEquals(node.getType(), "Visited");
     }
 
     @Test

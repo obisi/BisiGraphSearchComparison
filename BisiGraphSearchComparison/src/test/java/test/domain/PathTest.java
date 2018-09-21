@@ -56,6 +56,6 @@ public class PathTest {
     }
     @Test
     public void toStringTest() {
-        assertEquals(path.toString(), "0,1: 0");
+        assertEquals(path.toString(), "0,1: Empty, dist: 1");
     }
 }

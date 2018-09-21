@@ -71,7 +71,7 @@ public class GraphTest {
         graph.reset();
         for (int i = 0; i < graph.getGraph().length; i++) {
             for (int j = 0; j < graph.getGraph()[0].length; j++) {
-                assertEquals(graph.getGraph()[i][j].getType(), 0);
+                assertEquals(graph.getGraph()[i][j].getType(), "Empty");
             }
         }
     }
