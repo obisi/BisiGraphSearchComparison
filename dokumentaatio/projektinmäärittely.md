@@ -5,8 +5,8 @@ näyttää käytetty aika ja kertoa lyhimmän löydetyn reitin pituus.
 
 ## Tarvittavat tietorakenteet:
 
-Tietorakenteisiin pitää ainakin luoda jono, jolla metodeina pollFirst ja pollLast, jota voi sitten hyödyntää ainakin BFS ja DFS.
-Astarin algoritmi pitää vielä katsoa tarkemmin läpi myöhemmin, jotta tietää mitä algoritmeja tarvitsee.
+BFS:lle tehty First in, first out  logiikalla toimiva jono-tyyppinen tietorakenne metodeilla add, poll, isEmpty. DFS:lle tehty pino-tyyppinen tietorakenne last in, first out logiikalla samoilla metodeilla.
+Astar tarvitsee priority queuen, jonka aion toteuttaa minimikeolla. Tämän toteutus on vielä kesken.
 
 ## Algoritmit:
 
