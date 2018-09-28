@@ -1,7 +1,7 @@
 # BisiGraphSearchComparison
 Tietorakenteet ja algoritmit harjoitustyö, syksy 2018
 
-[Käyttöohjeet projektille] (https://github.com/obisi/BisiGraphSearchComparison/blob/master/ohjeet.md)
+[Käyttöohjeet projektille](https://github.com/obisi/BisiGraphSearchComparison/blob/master/ohjeet.md)
 
 [Projektin määrittely](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/projektinmäärittely.md)
 
