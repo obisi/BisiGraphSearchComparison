@@ -5,6 +5,7 @@
  */
 package bisigraph.domain;
 
+import bisigraph.datastructures.BisiHeap;
 import bisigraph.datastructures.BisiQueue;
 import bisigraph.datastructures.BisiStack;
 import java.awt.Dimension;
@@ -67,17 +68,17 @@ public class Graph extends JPanel {
     public void setNeighbors() {
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph[0].length; j++) {
-                if (!"Wall".equals(graph[i][j].getType())) {
-                    if (i > 0 && !graph[i - 1][j].visited() && !"Wall".equals(graph[i - 1][j].getType())) {
+                if (!graph[i][j].isWall()) {
+                    if (i > 0 && !graph[i - 1][j].visited() && !graph[i - 1][j].isWall()) {
                         graph[i][j].setNeighbor(graph[i - 1][j]);
                     }
-                    if (i < graph.length - 1 && !graph[i + 1][j].visited() && !"Wall".equals(graph[i + 1][j].getType())) {
+                    if (i < graph.length - 1 && !graph[i + 1][j].visited() && !graph[i + 1][j].isWall()) {
                         graph[i][j].setNeighbor(graph[i + 1][j]);
                     }
-                    if (j > 0 && !graph[i][j - 1].visited() && !"Wall".equals(graph[i][j - 1].getType())) {
+                    if (j > 0 && !graph[i][j - 1].visited() && !graph[i][j - 1].isWall()) {
                         graph[i][j].setNeighbor(graph[i][j - 1]);
                     }
-                    if (j < graph[0].length - 1 && !graph[i][j + 1].visited() && !"Wall".equals(graph[i][j + 1].getType())) {
+                    if (j < graph[0].length - 1 && !graph[i][j + 1].visited() && !graph[i][j + 1].isWall()) {
                         graph[i][j].setNeighbor(graph[i][j + 1]);
                     }
                 }
@@ -219,7 +220,7 @@ public class Graph extends JPanel {
             }
         }
     }
-
+ 
     /**
      * Function for GUI, user can choose empty nodes after button is pressed
      * @param label
@@ -285,6 +286,7 @@ public class Graph extends JPanel {
      * @return Path
      */
     public Path DFS() {
+        if (goal[0] == -1 || start[0] == -1) return null;
         setNeighbors();
         Path path = new Path(graph[start[0]][start[1]], null, 0);
         graph[start[0]][start[1]].visit();
@@ -318,10 +320,41 @@ public class Graph extends JPanel {
      * @return
      */
     public Path BFS() {
+        if (goal[0] == -1 || start[0] == -1) return null;
         setNeighbors();
         Path path = new Path(graph[start[0]][start[1]], null, 0);
         graph[start[0]][start[1]].visit();
         BisiQueue que = new BisiQueue();
+        que.add(path);
+        while (!que.isEmpty()) {
+            Path p = que.poll();
+            if (p.getNode().equals(graph[goal[0]][goal[1]])) {
+                drawPath(p);
+            }
+            p.getNode().setVisited();
+            int[] xy = p.getNode().getXY();
+            myLabels[xy[0]][xy[1]].setBackground(p.getNode().getColor());
+            Node[] neighbors = p.getNode().getNeighbors();
+            for (Node n : neighbors) {
+                if (n != null && !n.visited()) {
+                    n.setInLine();
+                    Path pt = new Path(n, p, p.getDistance()+1);
+                    que.add(pt);
+                    xy = pt.getNode().getXY();
+                    myLabels[xy[0]][xy[1]].setBackground(pt.getNode().getColor());
+                    n.visit();
+                }
+            }
+        }
+        return null;
+    }
+    
+        public Path astar() {
+        if (goal[0] == -1 || start[0] == -1) return null;
+        setNeighbors();
+        Path path = new Path(graph[start[0]][start[1]], null, 0);
+        graph[start[0]][start[1]].visit();
+        BisiHeap que = new BisiHeap(graph[goal[0]][goal[1]]);
         que.add(path);
         while (!que.isEmpty()) {
             Path p = que.poll();

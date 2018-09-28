@@ -58,17 +58,22 @@ public class Path {
     public int distanceToNode(Node n) {
         int x = node.getXY()[0] - n.getXY()[0];
         int y = node.getXY()[1] - n.getXY()[1];
-        return (int) Math.sqrt((x*x) + (y*y));    
+        return (int) Math.sqrt((x*x*10) + (y*y*10));    
     }
     
     /**
-     * Compares travelled distance + distance to given node with another Path object. Required for min heap. *DOES NOT WORK PROPERLY*
+     * Compares travelled distance or distance to given node with another Path object. Required for min heap. *DOES NOT WORK PROPERLY*
      * @param p Path to which this path is compared to
      * @param n Node where distance is calculated to
      * @return +, - or 0 whether goal is closer given travelled distance.
      */
     public int compare(Path p, Node n) {
-        return (distance + distanceToNode(n)) - (p.getDistance() + p.distanceToNode(n));
+        
+        if((distanceToNode(n) + distance) == (p.distanceToNode(n) + p.distance)){
+            return distance - p.getDistance();
+        }
+        return (distanceToNode(n) + distance) - (p.distanceToNode(n) + p.distance);
+
     }
     
     @Override
@@ -76,7 +81,7 @@ public class Path {
         int[] xy = node.getXY();
         String x = Integer.toString(xy[0]);
         String y = Integer.toString(xy[1]);
-        return x + "," + y +": " + node.getType() + ", dist: " + distance;
+        return x + "," + y +": " + node.getType() + ", travelled dist: " + distance;
     }
 }
 

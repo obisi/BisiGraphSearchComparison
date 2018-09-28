@@ -41,7 +41,6 @@ public class BisiHeapTest {
     public void setUp() {
         g = new Node(8,8);
         heap = new BisiHeap(g);
-        
     }
     
     @After
@@ -53,8 +52,14 @@ public class BisiHeapTest {
     // The methods must be annotated with annotation @Test. For example:
     // 
      @Test
-     // does not work yet, tests are pointless
-     public void insert() {
-
+     public void insertTest() {
+         Path p = new Path(new Node(0,0), null, 0);
+         heap.add(p);
+         assertEquals(heap.poll(), p);
+     }
+     
+      @Test
+     public void pollTest() {
+         assertEquals(heap.poll(), null); 
      }
 }

@@ -13,6 +13,11 @@ import java.util.PriorityQueue;
  *
  * @author bisi
  */
+
+
+// These functions are for later use, a base for a different kind of implemention.
+
+
 public class SearchAlgos {
 
     public Path DFS(Node start, Node goal) {

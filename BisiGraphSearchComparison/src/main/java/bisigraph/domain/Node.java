@@ -77,6 +77,12 @@ public class Node{
         type = 3;
         color = Color.BLACK;
     }
+    /**
+     * Returns whether Node is wall-type
+     */
+    public boolean isWall() {
+        return type == 3;
+    }
 
     /**
      * Sets the Node to goal-type
@@ -95,9 +101,11 @@ public class Node{
     }
 
     /**
-     * Sets the Node to empty-type
+     * Sets the Node to empty-type, reset visited and neightbor list
      */
     public void setEmpty() {
+        neighbors = new Node[4];
+        visited = false;
         type = 0;
         color = Color.lightGray;
     }
