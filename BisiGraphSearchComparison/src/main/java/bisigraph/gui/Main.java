@@ -88,6 +88,14 @@ public class Main {
                 graph.astar();
             }
         });
+        
+        JButton wallify = new JButton("Wallify");
+        wallify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                graph.wallify();
+            }
+        });
 
         JFrame frame = new JFrame("Grapher");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,6 +111,7 @@ public class Main {
         btnPanel.add(bfsbutton);
         btnPanel.add(dfsbutton);
         btnPanel.add(astarbutton);
+        btnPanel.add(wallify);
         topPanel.add(graph);
         panel.add(topPanel, BorderLayout.NORTH);
         panel.add(btnPanel, BorderLayout.SOUTH);

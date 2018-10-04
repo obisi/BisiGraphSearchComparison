@@ -83,6 +83,10 @@ public class Node{
     public boolean isWall() {
         return type == 3;
     }
+    
+    public boolean isEmpty() {
+        return type == 0;
+    }
 
     /**
      * Sets the Node to goal-type
