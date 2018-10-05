@@ -1,7 +1,7 @@
 # Viikkoraportti 5:
 
 
-Tällä viikolla panostin UI:n tekemiseen. En osannut tehdä sitä vielä kunnolla, joten harjoittelin tekemistä pienissä harjoitteluluokissa,
+Tällä viikolla panostin UI:n tekemiseen. En osannut käyttää animationtimeria vielä kunnolla, joten harjoittelin tekemistä pienissä harjoitteluluokissa,
 jotka eivät näy harjoitustyössä. Tein myös alun algoritmien vertailulle. Luotu luokka luo kartan satunnaisilla seinillä, ja testaa sillä jokaisen algoritmin. Tarkoituksena
 Laskea keskiarvot usealla eri kartalla, josta saadaan sitten keskiarvo nopeudesta.
 
