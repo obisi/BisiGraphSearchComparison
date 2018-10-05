@@ -8,6 +8,7 @@ import bisigraph.datastructures.BisiHeap;
 import bisigraph.domain.Graph;
 import bisigraph.domain.Node;
 import bisigraph.domain.Path;
+import bisigraph.searchalgos.TestCaller;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -96,15 +97,31 @@ public class Main {
                 graph.wallify();
             }
         });
-
+        
+        JButton draw = new JButton("draw");
+        draw.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Drawgraph.main();
+            }
+        });
+        
+        JButton test = new JButton("test");
+        test.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TestCaller tc = new TestCaller(500, 500);
+                System.out.println(tc.runTest(100));
+            }
+        });
+        
         JFrame frame = new JFrame("Grapher");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(panel);
         JPanel topPanel = new JPanel();
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        btnPanel.add(goalbutton);
-        btnPanel.add(goalbutton);
         btnPanel.add(startbutton);
+        btnPanel.add(goalbutton);
         btnPanel.add(wallbutton);
         btnPanel.add(emptybutton);
         btnPanel.add(resetbutton);
@@ -112,6 +129,8 @@ public class Main {
         btnPanel.add(dfsbutton);
         btnPanel.add(astarbutton);
         btnPanel.add(wallify);
+        btnPanel.add(draw);
+        btnPanel.add(test);
         topPanel.add(graph);
         panel.add(topPanel, BorderLayout.NORTH);
         panel.add(btnPanel, BorderLayout.SOUTH);
@@ -123,8 +142,8 @@ public class Main {
     
     public static void main(String[] args) {
         // you can set the length and width of the grid with x and y.
-        int x = 30;
-        int y = 30;
+        int x = 50;
+        int y = 50;
         SwingUtilities.invokeLater(new Runnable() {
 
             public void run() {

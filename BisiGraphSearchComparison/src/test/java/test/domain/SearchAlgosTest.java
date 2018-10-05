@@ -7,7 +7,7 @@ package test.domain;
 
 import bisigraph.domain.Graph;
 import bisigraph.domain.Node;
-import bisigraph.domain.SearchAlgos;
+import bisigraph.searchalgos.SearchAlgos;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bisigraph.domain;
+package bisigraph.searchalgos;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
+import bisigraph.datastructures.BisiHeap;
+import bisigraph.datastructures.BisiQueue;
+import bisigraph.datastructures.BisiStack;
+import bisigraph.domain.Node;
+import bisigraph.domain.Path;
 
 /**
  *
@@ -20,15 +22,16 @@ import java.util.PriorityQueue;
 
 public class SearchAlgos {
 
-    public Path DFS(Node start, Node goal) {
+    public long DFS(Node start, Node goal) {
+        long now = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
         start.visit();
-        LinkedList<Path> que = new LinkedList<Path>();
-        que.add(path);
-        while (!que.isEmpty()) {
-            Path p = que.pollLast();
+        BisiStack stack = new BisiStack();
+        stack.add(path);
+        while (!stack.isEmpty()) {
+            Path p = stack.poll();
             if (p.getNode().equals(goal)) {
-                return p;
+                return now - System.currentTimeMillis();
             }
             Node[] neighbors = p.getNode().getNeighbors();
             for (Node n : neighbors) {
@@ -36,24 +39,24 @@ public class SearchAlgos {
                     Path pt = new Path(n, p, p.getDistance()+1);
                     int[] xy = pt.getNode().getXY();
                     int[] xy2 = p.getNode().getXY();
-                    System.out.println("Node " + xy[0] +","+ xy[1] + " type: " + pt.getNode().getType() + " prev: " + "Node " + xy2[0] +","+ xy2[1] + " type: " + p.getNode().getType());
-                    que.add(pt);
+                    stack.add(pt);
                     n.visit();
                 }
             }
         }
-        return null;
+        return 0;
     }
 
-    public Path BFS(Node start, Node goal) {
+    public long BFS(Node start, Node goal) {
+        long now = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
         start.visit();
-        LinkedList<Path> que = new LinkedList<Path>();
+        BisiQueue que = new BisiQueue();
         que.add(path);
         while (!que.isEmpty()) {
             Path p = que.pollFirst();
             if (p.getNode().equals(goal)) {
-                return p;
+                return now - System.currentTimeMillis();
             }
             Node[] neighbors = p.getNode().getNeighbors();
             for (Node n : neighbors) {
@@ -67,25 +70,26 @@ public class SearchAlgos {
                 }
             }
         }
-        return null;
+        return 0;
     }
 
-    public Path astar(Node start, Node goal) {
-        PriorityQueue<Path> prioQue = new PriorityQueue<>();
+    public long astar(Node start, Node goal) {
+        long now = System.currentTimeMillis();
+        BisiHeap que = new BisiHeap(goal);
         Path p = new Path(start, null, 0);
-        prioQue.add(p);
-        while (!prioQue.isEmpty()) {
-            p = prioQue.poll();
+        que.add(p);
+        while (!que.isEmpty()) {
+            p = que.poll();
             Node[] neighbors = p.getNode().getNeighbors();
             for (Node n : neighbors) {
                 if (n == goal) {
-                    return new Path(n, p, p.getDistance()+1);
+                    return now - System.currentTimeMillis();
                 }
                 Path pt = new Path(n, p, p.getDistance()+1);
-                prioQue.add(pt);
+                que.add(pt);
             }
         }
-        return null;
+        return 0;
     }
 
 }

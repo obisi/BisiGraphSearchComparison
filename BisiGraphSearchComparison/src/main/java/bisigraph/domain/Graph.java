@@ -88,6 +88,18 @@ public class Graph extends JPanel {
             }
         }
     }
+    
+    public int getCellWidth(){
+        return myLabels[0][0].getWidth();
+    }
+    
+    public int getGraphWidth(){
+        return myLabels.length;
+    }
+    
+    public int getGraphHeight(){
+        return myLabels[0].length;
+    }
 
     // 
     /**
