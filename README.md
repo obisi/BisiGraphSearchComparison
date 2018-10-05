@@ -13,5 +13,7 @@ Tietorakenteet ja algoritmit harjoitustyö, syksy 2018
 
 [Viikkoraportti 3](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/viikkoraportti3.md)
 
-[Viikkoraportti 4](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/viikkoraportti4.md)
+[Viikkoraportti 4](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/viikkoraportti%204.md)
+
+[Viikkoraportti 5](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/viikkoraportti5.md)
 
