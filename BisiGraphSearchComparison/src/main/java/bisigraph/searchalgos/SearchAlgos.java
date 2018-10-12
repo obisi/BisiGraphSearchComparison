@@ -15,11 +15,7 @@ import bisigraph.domain.Path;
  *
  * @author bisi
  */
-
-
 // These functions are for later use, a base for a different kind of implemention.
-
-
 public class SearchAlgos {
 
     public long DFS(Node start, Node goal) {
@@ -31,12 +27,12 @@ public class SearchAlgos {
         while (!stack.isEmpty()) {
             Path p = stack.poll();
             if (p.getNode().equals(goal)) {
-                return now - System.currentTimeMillis();
+                return System.currentTimeMillis() - now;
             }
             Node[] neighbors = p.getNode().getNeighbors();
             for (Node n : neighbors) {
-                if (n!=null &&!n.visited()) {
-                    Path pt = new Path(n, p, p.getDistance()+1);
+                if (n != null && !n.visited()) {
+                    Path pt = new Path(n, p, p.getDistance() + 1);
                     int[] xy = pt.getNode().getXY();
                     int[] xy2 = p.getNode().getXY();
                     stack.add(pt);
@@ -54,17 +50,17 @@ public class SearchAlgos {
         BisiQueue que = new BisiQueue();
         que.add(path);
         while (!que.isEmpty()) {
-            Path p = que.pollFirst();
+            Path p = que.poll();
             if (p.getNode().equals(goal)) {
-                return now - System.currentTimeMillis();
+                return System.currentTimeMillis() - now;
             }
             Node[] neighbors = p.getNode().getNeighbors();
             for (Node n : neighbors) {
                 if (n != null && !n.visited()) {
-                    Path pt = new Path(n, p, p.getDistance()+1);
+                    Path pt = new Path(n, p, p.getDistance() + 1);
                     int[] xy = pt.getNode().getXY();
                     int[] xy2 = p.getNode().getXY();
-                    System.out.println("Node " + xy[0] +","+ xy[1] + " type: " + pt.getNode().getType() + " prev: " + "Node " + xy2[0] +","+ xy2[1] + " type: " + p.getNode().getType());
+                    //System.out.println("Node " + xy[0] + "," + xy[1] + " type: " + pt.getNode().getType() + " prev: " + "Node " + xy2[0] + "," + xy2[1] + " type: " + p.getNode().getType());
                     que.add(pt);
                     n.visit();
                 }
@@ -83,10 +79,14 @@ public class SearchAlgos {
             Node[] neighbors = p.getNode().getNeighbors();
             for (Node n : neighbors) {
                 if (n == goal) {
-                    return now - System.currentTimeMillis();
+                    return System.currentTimeMillis() - now;
                 }
-                Path pt = new Path(n, p, p.getDistance()+1);
-                que.add(pt);
+                if (n != null && !n.visited()) {
+                    Path pt = new Path(n, p, p.getDistance() + 1);
+                    que.add(pt);
+                    n.visit();
+                }
+
             }
         }
         return 0;

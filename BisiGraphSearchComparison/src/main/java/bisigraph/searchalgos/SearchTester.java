@@ -21,18 +21,29 @@ public class SearchTester {
     public SearchTester(int gW, int gH) {
 
         algos = new SearchAlgos();
-
+        
+        long i = 0;
+        int j = 0;
+        while(i == 0){
+            buildGraph(gW, gH);
+            i = testAstar();
+            j++;
+        }
+        System.out.println("Succeeded in building a solvable map on the " + j + ". try");
+    }
+    
+    public void buildGraph(int gW, int gH) {
+        
         this.graph = new Node[gW][gH];
-        this.walls = new int[gW][gH];
-
         int walls = (gW * gH) / 3;
-
+        
+        
         for (int i = 0; i < gW; i++) {
             for (int j = 0; j < gH; j++) {
                 graph[i][j] = new Node(i, j);
                 Random rnd = new Random();
 
-                if (walls > 0 && rnd.nextDouble() > 0.34) {
+                if (rnd.nextDouble() < 0.33) {
                     graph[i][j].setWall();
                 }
 
@@ -40,7 +51,7 @@ public class SearchTester {
         }
         graph[0][0].setStart();
         graph[graph.length - 1][graph[0].length - 1].setGoal();
-
+        setNeighbors();
     }
 
     public void setNeighbors() {
@@ -72,16 +83,20 @@ public class SearchTester {
                 cG[i][j] = new Node(i, j);
                 if (graph[i][j].isWall()) {
                     cG[i][j].setWall();
-                } else {
-                    Node[] neighbors = graph[i][j].getNeighbors();
-                    for (Node n : neighbors) {
-                        if(n != null){
-                            cG[i][j].setNeighbor(new Node(n.getXY()[0], n.getXY()[1]));
-                        }
-                    }
-                }
+                } 
             }
         }
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                Node[] neighbors = graph[i][j].getNeighbors();
+                    for (Node n : neighbors) {
+                        if(n != null){
+                            cG[i][j].setNeighbor(cG[n.getXY()[0]][n.getXY()[1]]);
+                        }
+                    }
+            }
+        }
+        
         cG[0][0].setStart();
         cG[cG.length - 1][cG[0].length - 1].setGoal();
         return cG;
@@ -95,13 +110,13 @@ public class SearchTester {
 
     public long testDFS() {
         Node[][] g = getGraph();
-        return algos.astar(g[0][0], g[g.length][g[0].length]);
+        return algos.DFS(g[0][0], g[g.length-1][g[0].length-1]);
 
     }
 
     public long testBFS() {
         Node[][] g = getGraph();
-        return algos.astar(g[0][0], g[g.length][g[0].length]);
+        return algos.BFS(g[0][0], g[g.length-1][g[0].length-1]);
     }
 
 }

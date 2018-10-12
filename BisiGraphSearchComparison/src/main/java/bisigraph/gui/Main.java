@@ -4,15 +4,14 @@
  * and open the template in the editor.
  */
 package bisigraph.gui;
-import bisigraph.datastructures.BisiHeap;
+
 import bisigraph.domain.Graph;
-import bisigraph.domain.Node;
-import bisigraph.domain.Path;
 import bisigraph.searchalgos.TestCaller;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,133 +22,52 @@ import javax.swing.SwingUtilities;
  * @author bisi
  */
 public class Main {
-    
-    private static void createAndShowGui(int x, int y) {
-        int cellWidth = 20;
-        Graph graph = new Graph(x, y, cellWidth);
-        JPanel panel = new JPanel(new BorderLayout());
-        
-        JButton goalbutton = new JButton("Set Goal");
-        goalbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.setGoal();
-            }
-        });
-        JButton startbutton = new JButton("Set Start");
-        startbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.setStart();
-            }
-        });
-        JButton wallbutton = new JButton("Set Wall");
-        wallbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.setWall();
-            }
-        });
-        JButton emptybutton = new JButton("Set Empty");
-        emptybutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.setEmpty();
-            }
-        });
 
-        JButton resetbutton = new JButton("Reset");
-        resetbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.reset();
-            }
-        });
+    private static GUIbuilder gb = new GUIbuilder();
 
-        JButton bfsbutton = new JButton("BFS");
-        bfsbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.BFS();
-            }
-        });
-
-        JButton dfsbutton = new JButton("DFS");
-        dfsbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.DFS();
-            }
-        });
-        
-        JButton astarbutton = new JButton("Astar");
-        astarbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.astar();
-            }
-        });
-        
-        JButton wallify = new JButton("Wallify");
-        wallify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graph.wallify();
-            }
-        });
-        
-        JButton draw = new JButton("draw");
-        draw.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Drawgraph.main();
-            }
-        });
-        
-        JButton test = new JButton("test");
-        test.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TestCaller tc = new TestCaller(500, 500);
-                System.out.println(tc.runTest(100));
-            }
-        });
-        
-        JFrame frame = new JFrame("Grapher");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(panel);
-        JPanel topPanel = new JPanel();
-        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        btnPanel.add(startbutton);
-        btnPanel.add(goalbutton);
-        btnPanel.add(wallbutton);
-        btnPanel.add(emptybutton);
-        btnPanel.add(resetbutton);
-        btnPanel.add(bfsbutton);
-        btnPanel.add(dfsbutton);
-        btnPanel.add(astarbutton);
-        btnPanel.add(wallify);
-        btnPanel.add(draw);
-        btnPanel.add(test);
-        topPanel.add(graph);
-        panel.add(topPanel, BorderLayout.NORTH);
-        panel.add(btnPanel, BorderLayout.SOUTH);
-        frame.pack();
-        frame.setLocationByPlatform(true);
-        frame.setVisible(true);
-        
-    }
-    
     public static void main(String[] args) {
-        // you can set the length and width of the grid with x and y.
-        int x = 50;
-        int y = 50;
+        System.out.println("Welcome to BisiGraper!\n\n");
+
+        System.out.println("First, select width and height of your graph. \n"
+                + "Size is limited 5-100 (Change it on your own peril)");
+        int x = getInt("Width: ");
+        int y = getInt("Height: ");
+
+        System.out.println("Thank you! Graph is being drawn. Some tips:\n"
+                + "You can choose Start and Goal by clicking the button,\nand then "
+                + "clicking a cell on the graph. \nSame goes for walls. You can "
+                + "erase cells using Empty. \nWallify randomly walls about one third "
+                + "of the map. Clear removes everything.\nEach test has their own button. "
+                + "Try to guess which is which! \nYou can test larger maps "
+                + "by clicking test.\n"
+                + "Remember to keep console open! Information is printed here!\n");
         SwingUtilities.invokeLater(new Runnable() {
 
             public void run() {
-                createAndShowGui(x, y);
+                gb.createAndShowGui(x, y);
             }
+
         });
+
+    }
+
+    private static int getInt(String line) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(line);
+        int i = -1;
+        while (i < 5 || i > 100) {
+            String input = sc.next();
+            try {
+                i = Integer.parseInt(input);
+            } catch (NumberFormatException n) {
+                System.out.println("Incorrect input.\n");
+                continue;
+            }
+            if(i < 5 || i > 100){
+                System.out.println("5-100!\n");
+            }
+        }
+        return i;
     }
 
 }

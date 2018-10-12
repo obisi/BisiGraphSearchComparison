@@ -68,7 +68,7 @@ public class GraphTest {
     
     @Test
     public void resetTest(){
-        graph.reset();
+        graph.clear();
         for (int i = 0; i < graph.getGraph().length; i++) {
             for (int j = 0; j < graph.getGraph()[0].length; j++) {
                 assertEquals(graph.getGraph()[i][j].getType(), "Empty");

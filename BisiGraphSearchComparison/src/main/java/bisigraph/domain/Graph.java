@@ -8,6 +8,7 @@ package bisigraph.domain;
 import bisigraph.datastructures.BisiHeap;
 import bisigraph.datastructures.BisiQueue;
 import bisigraph.datastructures.BisiStack;
+import bisigraph.searchalgos.GUISearchAlgos;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.LinkedList;
@@ -25,6 +26,8 @@ public class Graph extends JPanel {
 
     private Node[][] graph;
     private JLabel[][] myLabels;
+    
+    private GUISearchAlgos gsa = new GUISearchAlgos();
 
     private MyMouseListener myListener;
 
@@ -65,7 +68,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Sets neightbours for the search graph
+     * Sets neightbours for the search graph Nodes
      */
     public void setNeighbors() {
         for (int i = 0; i < graph.length; i++) {
@@ -88,16 +91,16 @@ public class Graph extends JPanel {
             }
         }
     }
-    
-    public int getCellWidth(){
+
+    public int getCellWidth() {
         return myLabels[0][0].getWidth();
     }
-    
-    public int getGraphWidth(){
+
+    public int getGraphWidth() {
         return myLabels.length;
     }
-    
-    public int getGraphHeight(){
+
+    public int getGraphHeight() {
         return myLabels[0].length;
     }
 
@@ -173,7 +176,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Function for GUI, user can choose goal node after button is pressed
+     * Clicked node if turned into goal node, if goal selection is on
      *
      * @param label
      */
@@ -181,7 +184,6 @@ public class Graph extends JPanel {
         for (int i = 0; i < myLabels.length; i++) {
             for (int j = 0; j < myLabels[i].length; j++) {
                 if (label == myLabels[i][j]) {
-                    myListener.setAllFalse();
                     myListener.setGoal();
                     if (goal[0] != -1) {
                         graph[goal[0]][goal[1]].setEmpty();
@@ -191,7 +193,6 @@ public class Graph extends JPanel {
                     goal[0] = i;
                     goal[1] = j;
                     myLabels[i][j].setBackground(graph[i][j].getColor());
-                    myListener.setAllFalse();
                     return;
                 }
             }
@@ -199,7 +200,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Function for GUI, user can choose start node after button is pressed
+     * Clicked node if turned into start node, if start selection is on
      *
      * @param label
      */
@@ -207,7 +208,6 @@ public class Graph extends JPanel {
         for (int i = 0; i < myLabels.length; i++) {
             for (int j = 0; j < myLabels[i].length; j++) {
                 if (label == myLabels[i][j]) {
-                    myListener.setAllFalse();
                     myListener.setStart();
                     if (start[0] != -1) {
                         graph[start[0]][start[1]].setEmpty();
@@ -217,7 +217,6 @@ public class Graph extends JPanel {
                     start[0] = i;
                     start[1] = j;
                     myLabels[i][j].setBackground(graph[i][j].getColor());
-                    myListener.setAllFalse();
                     return;
                 }
             }
@@ -225,7 +224,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Function for GUI, user can choose wall nodes after button is pressed
+     * Clicked node if turned into wall node, if wall selection is on
      *
      * @param label
      */
@@ -233,7 +232,6 @@ public class Graph extends JPanel {
         for (int i = 0; i < myLabels.length; i++) {
             for (int j = 0; j < myLabels[i].length; j++) {
                 if (label == myLabels[i][j]) {
-                    myListener.setAllFalse();
                     myListener.setWall();
                     graph[i][j].setWall();
                     myLabels[i][j].setBackground(graph[i][j].getColor());
@@ -244,7 +242,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Function for GUI, user can choose empty nodes after button is pressed
+     * Clicked node if turned into empty node, if empty selection is on
      *
      * @param label
      */
@@ -260,7 +258,6 @@ public class Graph extends JPanel {
                         start[0] = -1;
                         start[1] = -1;
                     }
-                    myListener.setAllFalse();
                     myListener.setEmpty();
                     graph[i][j].setEmpty();
                     myLabels[i][j].setBackground(graph[i][j].getColor());
@@ -285,29 +282,29 @@ public class Graph extends JPanel {
      * Reset the graph, then randomly walls 1/3 of the area.
      */
     public void wallify() {
-        reset();
-        
+        clear();
+
         int walls = (graph[0].length * graph.length) / 3;
         int i = 0;
-        
+
         Random rnd = new Random();
-        
-        while(i < walls){
+
+        while (i < walls) {
             int x = rnd.nextInt(graph.length);
             int y = rnd.nextInt(graph.length);
-            if(graph[x][y].isEmpty()){
+            if (graph[x][y].isEmpty()) {
                 graph[x][y].setWall();
                 myLabels[x][y].setBackground(graph[x][y].getColor());
                 i++;
-            } 
+            }
         }
 
     }
 
     /**
-     * Resets the graph to empty and light grey *DOES NOT WORK PROPERLY YET*
+     * Clears the graph to empty and light grey
      */
-    public void reset() {
+    public void clear() {
         goal[0] = -1;
         goal[1] = -1;
         start[0] = -1;
@@ -319,7 +316,25 @@ public class Graph extends JPanel {
                 myLabels[i][j].setBackground(graph[i][j].getColor());
             }
         }
+    }
 
+    /**
+     * Resets the graph to empty and light grey while keeping walls, start and goal
+     */
+    private void reset() {
+        for (int i = 0; i < myLabels.length; i++) {
+            for (int j = 0; j < myLabels[0].length; j++) {
+                if (!graph[i][j].isWall()) {
+                    graph[i][j].setEmpty();
+                    myLabels[i][j].setBackground(graph[i][j].getColor());
+                }
+
+            }
+        }
+        graph[start[0]][start[1]].setStart();
+        myLabels[start[0]][start[1]].setBackground(graph[start[0]][start[1]].getColor());
+        graph[goal[0]][goal[1]].setGoal();
+        myLabels[goal[0]][goal[1]].setBackground(graph[goal[0]][goal[1]].getColor());
     }
 
     /**
@@ -327,40 +342,13 @@ public class Graph extends JPanel {
      *
      * @return Path
      */
-    public Path DFS() {
+    public void DFS() {
         if (goal[0] == -1 || start[0] == -1) {
-            return null;
+            return;
         }
-        long aikaAlussa = System.currentTimeMillis();
+        reset();
         setNeighbors();
-        Path path = new Path(graph[start[0]][start[1]], null, 0);
-        graph[start[0]][start[1]].visit();
-        BisiStack stack = new BisiStack();
-        stack.add(path);
-        while (!stack.isEmpty()) {
-            Path p = stack.poll();
-            if (p.getNode().equals(graph[goal[0]][goal[1]])) {
-                long aikaLopussa = System.currentTimeMillis();
-                System.out.println("DFS found a path in: " + (aikaLopussa - aikaAlussa) + "ms.");
-                drawPath(p);
-                return p;
-            }
-            p.getNode().setVisited();
-            int[] xy = p.getNode().getXY();
-            myLabels[xy[0]][xy[1]].setBackground(p.getNode().getColor());
-            Node[] neighbors = p.getNode().getNeighbors();
-            for (Node n : neighbors) {
-                if (n != null && !n.visited()) {
-                    n.setInLine();
-                    Path pt = new Path(n, p, p.getDistance() + 1);
-                    stack.add(pt);
-                    xy = pt.getNode().getXY();
-                    myLabels[xy[0]][xy[1]].setBackground(pt.getNode().getColor());
-                    n.visit();
-                }
-            }
-        }
-        return null;
+        drawPath(gsa.DFS(myLabels, graph, graph[start[0]][start[1]], graph[goal[0]][goal[1]]));
     }
 
     /**
@@ -368,76 +356,22 @@ public class Graph extends JPanel {
      *
      * @return
      */
-    public Path BFS() {
+    public void BFS() {
         if (goal[0] == -1 || start[0] == -1) {
-            return null;
+            return;
         }
-        long aikaAlussa = System.currentTimeMillis();
+        reset();
         setNeighbors();
-        Path path = new Path(graph[start[0]][start[1]], null, 0);
-        graph[start[0]][start[1]].visit();
-        BisiQueue que = new BisiQueue();
-        que.add(path);
-        while (!que.isEmpty()) {
-            Path p = que.poll();
-            if (p.getNode().equals(graph[goal[0]][goal[1]])) {
-                long aikaLopussa = System.currentTimeMillis();
-                System.out.println("BFS found the shortest path in: " + (aikaLopussa - aikaAlussa) + "ms.");
-                drawPath(p);
-                return p;
-            }
-            p.getNode().setVisited();
-            int[] xy = p.getNode().getXY();
-            myLabels[xy[0]][xy[1]].setBackground(p.getNode().getColor());
-            Node[] neighbors = p.getNode().getNeighbors();
-            for (Node n : neighbors) {
-                if (n != null && !n.visited()) {
-                    n.setInLine();
-                    Path pt = new Path(n, p, p.getDistance() + 1);
-                    que.add(pt);
-                    xy = pt.getNode().getXY();
-                    myLabels[xy[0]][xy[1]].setBackground(pt.getNode().getColor());
-                    n.visit();
-                }
-            }
-        }
-        return null;
+        drawPath(gsa.BFS(myLabels, graph, graph[start[0]][start[1]], graph[goal[0]][goal[1]]));
     }
 
-    public Path astar() {
+    public void astar() {
         if (goal[0] == -1 || start[0] == -1) {
-            return null;
+            return;
         }
-        long aikaAlussa = System.currentTimeMillis();
+        reset();
         setNeighbors();
-        Path path = new Path(graph[start[0]][start[1]], null, 0);
-        graph[start[0]][start[1]].visit();
-        BisiHeap que = new BisiHeap(graph[goal[0]][goal[1]]);
-        que.add(path);
-        while (!que.isEmpty()) {
-            Path p = que.poll();
-            if (p.getNode().equals(graph[goal[0]][goal[1]])) {
-                long aikaLopussa = System.currentTimeMillis();
-                System.out.println("Astar found the shortest path in: " + (aikaLopussa - aikaAlussa) + "ms.");
-                drawPath(p);
-                return p;
-            }
-            p.getNode().setVisited();
-            int[] xy = p.getNode().getXY();
-            myLabels[xy[0]][xy[1]].setBackground(p.getNode().getColor());
-            Node[] neighbors = p.getNode().getNeighbors();
-            for (Node n : neighbors) {
-                if (n != null && !n.visited()) {
-                    n.setInLine();
-                    Path pt = new Path(n, p, p.getDistance() + 1);
-                    que.add(pt);
-                    xy = pt.getNode().getXY();
-                    myLabels[xy[0]][xy[1]].setBackground(pt.getNode().getColor());
-                    n.visit();
-                }
-            }
-        }
-        return null;
+        drawPath(gsa.astar(myLabels, graph, graph[start[0]][start[1]], graph[goal[0]][goal[1]]));
     }
 
     /**
@@ -446,6 +380,9 @@ public class Graph extends JPanel {
      * @param p
      */
     public void drawPath(Path p) {
+        if(p == null){
+            return;
+        }
         updateColor();
         while (p.getPrevious() != null) {
             p = p.getPrevious();
