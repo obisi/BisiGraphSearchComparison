@@ -19,20 +19,16 @@ public class TestCaller {
     
     public void test(){
         System.out.println("\n\nHello! Welcome to Graph tester!\n\n"
-                + "Here you can try out large maps.\nThey will not be "
-                + "drawn, so searches work faster and you can try BIG maps."
-                + "\nBut first, give the width and height of the map.\n"
-                + "5 minimum here too!");
+                + "Here you can try out large maps.\n "
+                + "\nGive the width and height of the map.\n");
         
         gW = getInt("Width: ");
         gH = getInt("Height: ");
         
-        System.out.println("Excellent!\n Now, the number of test. \nBig maps take time, so choose "
-                + "wisely! \nAlso, under 5 is not on option here either.");
         
-        int tests = getInt("Number of tests: ");
+        int tests = getInt("\nNumber of tests: ");
         
-        System.out.println("Let the testing commence!\n\n\n");
+        System.out.println("Testing:\n\n\n");
         
         String s = runTest(tests);
         

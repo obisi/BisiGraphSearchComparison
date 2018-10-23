@@ -67,7 +67,7 @@ public class Node{
 
    @Override
    public String toString() {
-      return Integer.toString(type);
+      return Integer.toString(type) + "xy:"+ Integer.toString(x) + "," + Integer.toString(y);
    }
    
     /**
@@ -172,19 +172,6 @@ public class Node{
     }
 
 
-    @Override
-    public int hashCode() {
-        
-         // paska hash, pitää keksiä parempi
-         
-         
-        int hash = 7;
-        hash = 97 * hash + this.type;
-        hash = 97 * hash + this.x;
-        hash = 97 * hash + this.y;
-        return hash;
-    }
-    
     /**
      * Check if the x,y coordinates are the same
      * @param Node to compare to

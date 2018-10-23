@@ -12,10 +12,23 @@ import bisigraph.domain.Path;
  * @author bisi
  */
 public class BisiStack {
+
+    @Override
+    public String toString() {
+        String s = "";
+        for(int i = 0; i<stack.length; i++){
+            if(stack[i] == null){
+                s+="NULL\n";
+            } else {
+                s+= stack[i].toString()+"\n";
+            } 
+        }
+        
+        return "BisiStack:\n"+ s;
+    }
     
         
     Path[] stack;
-    int index;
     int size;
     
     /** Self made stack last in, first out data structure
@@ -23,8 +36,7 @@ public class BisiStack {
      */
     public BisiStack(){
         stack = new Path[8];
-        index = 0;
-        size = 0;
+        size = -1;
     }
     
     /**
@@ -32,11 +44,11 @@ public class BisiStack {
      * @param Path
      */
     public void add(Path p){
-        stack[size] = p;
         size++;
-        if(size == stack.length){
+        stack[size] = p;
+        if(size == stack.length-1){
             Path[] temp = new Path[stack.length * 2];
-            for(int i = 0; i<stack.length; i++){
+            for(int i = 0; i<size; i++){
                 temp[i] = stack[i];
             }
             stack = temp;
@@ -48,26 +60,21 @@ public class BisiStack {
      * @return Last added Path
      */
     public Path poll(){
-        if(size == 0){
-            index = 0;
+        if(size == -1){
             return null;
         }
-        Path p = stack[index];
-        index++;
-        if(index == size){
-            int length = stack.length;
-            if(stack.length > 8){
-                length = stack.length / 2;
-            }
+        Path p = stack[size];
+        size--;
+        if(stack.length > 8 && size <= stack.length / 4){
+            int length = stack.length / 2;
             Path[] temp = new Path[length];
             for(int i = 0; i<temp.length; i++){
-                if(stack[index+i] == null){
+                if(stack[i] == null){
                     break;
                 }
-                temp[i] = stack[index + i];
+                temp[i] = stack[i];
             }
-            size = 0;
-            index = 0;
+            stack = temp;
         }
         return p;
     }
@@ -77,11 +84,13 @@ public class BisiStack {
      * @return boolean
      */
     public boolean isEmpty(){
-        if(size <= 0){
+        if(size == -1){
             return true;
         }
         return false;
     }
+    
+    
     
     
 }

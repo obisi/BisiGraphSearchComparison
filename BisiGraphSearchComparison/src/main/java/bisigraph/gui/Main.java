@@ -29,16 +29,16 @@ public class Main {
         System.out.println("Welcome to BisiGraper!\n\n");
 
         System.out.println("First, select width and height of your graph. \n"
-                + "Size is limited 5-100 (Change it on your own peril)");
+                + "Size is limited 5-100");
         int x = getInt("Width: ");
         int y = getInt("Height: ");
 
-        System.out.println("Thank you! Graph is being drawn. Some tips:\n"
+        System.out.println("Graph is being drawn. Some tips:\n"
                 + "You can choose Start and Goal by clicking the button,\nand then "
                 + "clicking a cell on the graph. \nSame goes for walls. You can "
                 + "erase cells using Empty. \nWallify randomly walls about one third "
                 + "of the map. Clear removes everything.\nEach test has their own button. "
-                + "Try to guess which is which! \nYou can test larger maps "
+                + "\nYou can test larger maps "
                 + "by clicking test.\n"
                 + "Remember to keep console open! Information is printed here!\n");
         SwingUtilities.invokeLater(new Runnable() {

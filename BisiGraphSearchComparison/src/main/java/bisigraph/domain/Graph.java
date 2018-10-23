@@ -388,6 +388,9 @@ public class Graph extends JPanel {
             p = p.getPrevious();
             p.getNode().setPath();
             int[] xy = p.getNode().getXY();
+            if(xy[0] == start[0] && xy[1] == start[1]){
+                break;
+            }
             myLabels[xy[0]][xy[1]].setBackground(p.getNode().getColor());
         }
     }

@@ -18,6 +18,21 @@ public class BisiHeap {
     private int heapsize;
     Node goal;
     
+    
+    @Override
+    public String toString() {
+        String s = "";
+        for(int i = 0; i<heap.length; i++){
+            if(heap[i] == null){
+                s+="NULL\n";
+            } else {
+                s+= heap[i].toString()+"\n";
+            } 
+        }
+        
+        return "BisiStack:\n"+ s;
+    }
+    
     /**
      *
      * @param g
