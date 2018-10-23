@@ -1,4 +1,6 @@
-Tests were run by an automatic graph builder. It ran for 20 times for each graph size. A new graph was constructed for each test run.  Each new graph was filled with randomized walls, which cover roughly 1/3 of the area. Unsolvable maps were discarded using A*. An average run time for each search algorithm was calculated afterwards.
+# Graph Search Run Times Without GUI elements
+
+Tests were run by an automatic graph builder. Tests were run for 20 + 20 times for each graph size. A new graph was constructed for each test run.  Each new graph was filled with randomized walls, which cover roughly 1/3 of the area. Unsolvable maps were discarded using A*. An average run time for each search algorithm was calculated afterwards.
 
 
 ### First set of tests
