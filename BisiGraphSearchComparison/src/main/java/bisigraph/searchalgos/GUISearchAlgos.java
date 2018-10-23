@@ -88,6 +88,7 @@ public class GUISearchAlgos {
     }
 
     public Path astar(JLabel[][] myLabels, Node[][] graph, Node start, Node goal) {
+        long startTime = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
         start.visit();
         BisiHeap que = new BisiHeap(goal);
