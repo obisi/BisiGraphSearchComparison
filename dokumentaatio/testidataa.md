@@ -37,3 +37,17 @@ Tests were run by an automatic graph builder. It ran for 20 times for each graph
 
 
 We can see that BFS starts to take longer and longer with larger inputs. DFS seems to be pretty close to A*, but starts to rise with larger inputs. There is more variation however, as DFS can be the fastest in certain cases. Certain cases it can look for the right path for a very long time. A* keeps its run times low even with large graphs. Very fast runtimes even with large graphs makes it ideal to discard unsolvable graphs during graph building.
+
+
+### Plot For Search Run Times
+
+![Graph search plot](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/Plots/Graph_Search_Plot.png)
+
+Tests were run twice. Graphs were same size, and runtime was the average of 20 runs for each algorithm.
+Graph shows slight variation with the same input tests. Lines for algorithms do however follow the same trend. We can see that BFS starts to get slower as graph gets larger in size. DFS also starts to slow down, but much slower. Astar, however, has a really low run time even with large inputs.
+
+
+### Plot for Test Run Times
+![Test Run time plot](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/Plots/test_time_plot.png)
+
+Majority of time taken by each tests is construction of graph. First a new graph is constructed with a randomized wall cover, about one third of the area. Then the graph is tested with astar. Graph is rejected, if astar cannot solve it. Since the same graph cannot be used for all three algorithms, a copy of the graph has to be build for each individual algorithm. This means that the graph is constructed four times for each run. Each node also needs to have its neighbor list built four times. This takes quite some time with large graphs, which explains why the run time starts to rise drastically. Search algorithm run times is also included in the test time, but the time added is minimal. Even BFS does not contribute much to the total time taken.
