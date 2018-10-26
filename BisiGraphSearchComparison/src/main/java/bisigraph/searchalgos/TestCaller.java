@@ -64,6 +64,9 @@ public class TestCaller {
         for (int i = 0; i < amount; i++) {
             System.out.println((i + 1) + ". iteration of test:");
             SearchTester st = new SearchTester(gW, gH);
+            if(!st.Start()){
+                return "Seems like map is unsolvable! Try again!";
+            }
             bfs += st.testBFS();
             dfs += st.testDFS();
             astar += st.testAstar();

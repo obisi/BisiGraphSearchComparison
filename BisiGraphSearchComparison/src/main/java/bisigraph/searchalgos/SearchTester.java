@@ -16,6 +16,8 @@ public class SearchTester {
 
     private Node[][] graph;
     private SearchAlgos algos;
+    private int gH;
+    private int gW;
 
     /**
      * Builds a new graph with given height and width. If the graph is unsolvable with astar, discard and build a new one.
@@ -23,18 +25,28 @@ public class SearchTester {
      * @param height
      */
     public SearchTester(int gW, int gH) {
-
+        this.gH = gH;
+        this.gW = gW;
         algos = new SearchAlgos();
         
+    }
+    
+    public boolean Start(){
         long i = -1;
         int j = 0;
         while(i == -1){
             buildGraph(gW, gH);
             i = testAstar();
             j++;
+            if(j > 30){
+                return false;
+            }
         }
         System.out.println("Succeeded in building a solvable map on the " + j + ". try");
+        return true;
     }
+
+    
     
     /**
      * Builds a new graph

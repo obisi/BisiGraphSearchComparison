@@ -44,7 +44,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
 
             public void run() {
-                gb.createAndShowGui(x, y);
+                gb.createAndShowGui(y, x);
             }
 
         });

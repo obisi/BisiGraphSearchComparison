@@ -287,7 +287,7 @@ public class Graph extends JPanel {
 
         while (i < walls) {
             int x = rnd.nextInt(graph.length);
-            int y = rnd.nextInt(graph.length);
+            int y = rnd.nextInt(graph[0].length);
             if (graph[x][y].isEmpty()) {
                 graph[x][y].setWall();
                 myLabels[x][y].setBackground(graph[x][y].getColor());
