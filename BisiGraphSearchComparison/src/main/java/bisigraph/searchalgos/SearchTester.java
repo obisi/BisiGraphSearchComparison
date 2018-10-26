@@ -20,7 +20,8 @@ public class SearchTester {
     private int gW;
 
     /**
-     * Builds a new graph with given height and width. If the graph is unsolvable with astar, discard and build a new one.
+     * This class is used to build a graph to test.
+     * 
      * @param width
      * @param height
      */
@@ -30,6 +31,11 @@ public class SearchTester {
         algos = new SearchAlgos();
         
     }
+    
+     /**
+     * This method builds a solvable graph. If graph is unsolvable after 30 tries, method return false to caller function.
+     * 
+     */
     
     public boolean Start(){
         long i = -1;

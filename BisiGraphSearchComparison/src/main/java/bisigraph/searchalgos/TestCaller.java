@@ -18,7 +18,8 @@ public class TestCaller {
     static Scanner sc = new Scanner(System.in);
 
     /**
-     * Runs a series of tests. User defines the size of the graph, and number of tests to run.
+     * Runs a series of tests. User defines the size of the graph, and number of tests to run. If given height and width produce only
+     * unsolvable maps (over 30 tries), test is aborted.
      */
     public void test(){
         String y = "y";
