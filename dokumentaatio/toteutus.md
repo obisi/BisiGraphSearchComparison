@@ -47,7 +47,7 @@ joten tein tekstipohjaisen testauksen. Tällä menetelmällä tosin voi tarkemmi
 piirtämiseen ei kulu aikaa.
 
 
-Lähteet:
+#Lähteet:
 
 http://bigocheatsheet.com
 https://en.wikipedia.org/
