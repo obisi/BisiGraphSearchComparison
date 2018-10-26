@@ -1,6 +1,11 @@
 # Käyttöohjeet:
 
-Avaa ohjelma editorilla (esim Netbeans). Muuta main-funktiossa kartan kokoa x ja y muuttujiin, jos tarpeellista. Aja ohjelma.
-Painamalla nappia start, voit päättää mistä haku lähtee. Painamalla goal, voit päättää minne haku päättyy. Voit valita vain
-yhden pisteen molempia. Voit myös lisätä muureja wall-napilla. Wallify arpoo kartaan 1/3 alueelle muureja satunnaisiin paikkoihin.  BFS käynnistää leveyssuuntaisen haun ja DFS syvyyssuuntaisen.
-Voit myös kokeilla Astar hakua sen omalla napilla. Voit resetoida kartan painamalla nappia Clear All. Konsoliin tulostuu kuljettu reitti. Test -nappi avaa tekstipohjaisen käyttöliittymän konsoliin, jolla voi testata karttoja ilman graafista piirtämistä. Näin voi testata isojakin karttoja, sekä nähdä paremmin pelkän haun aikavaativuudet.
+Lataa ohjelma gitistä. Avaa projekti IDE:llä (esim Netbeans). Aja ohjelma. Tekstipohjainen käyttöliittymä kysyy ensin piirrettävän kartan koon. Sopivat arvot ovat 10-100 välillä. 
+
+Kun olet valinnut kartan koon, uusi ikkuna aukeaa. Ikkunassa on kartta, sekä napit, joilla ohjelmaa käytetään. Painamalla nappia Set start, voit valita kartalta, mistä reitinhaku aloitetaan. Aloitusruutu on valkoinen. Napista set goal voit päättää, mihin reitinhaku päättyy. Lopetusruutu on punainen. Voit luoda seiniä, eli mustia ruutuja, painamalla set wall. Set empty -napilla voit nollata valitsemasi ruudun takaisin tyhjäksi, eli vaaleanharmaaksi.
+
+Napista wallify ohjelma pyyhkii ensin kartan tyhjäksi, jonka jälkeen se arpoo noin yhden kolmasosan alueesta seinäksi. Tämän jälkeen voit itse valita maalin ja aloituspaikan. Clear all Pyyhkii koko kartan tyhjäksi.
+
+Napit DFS, BFS ja Astar käynnistävät reitinhaun. Mikäli aloitusta ja maalia ei ole valittu, haku ei käynnisty. Haun kesto tulostuu konsoliin. Haun edetessä tummanharmaaksi muuttuneet ruudut ovat käytyjä ruutuja, sininen on löydetty reitti. DFS tekee syvyyssuuntaisen haun, BFS leveyssuuntaisen ja Astar käynnistää A*-haun.
+
+Napilla test avautuu konsoliin tekstipohjainen liittymä reittihakujen testaukselle. Voit määrittää kartan koon, sekä testien määrän. Ohjelma arpoo satunnaisesti testien määrän läpäistäviä karttoja, ja suorittaa hakualgoritmit niissä. Suoritettujen hakujen jälkeen se laskee keskiarvojen jokaiselle hakualgoritmille, ja tulostaa tiedot konsoliin. Kirjoittamalla 'y', voit yrittää uudestaan. Mikäli annetuilla luvuilla ei löydy ratkaistavaa karttaa 30:llä yrityksellä, testi keskeytetään.
