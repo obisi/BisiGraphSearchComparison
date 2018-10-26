@@ -36,6 +36,8 @@ n-kappaletta operaatioita. Tällöin aikavaativuus on O(n). Tilavaativuus molemm
 
 ![Graph search plot](https://github.com/obisi/BisiGraphSearchComparison/blob/master/dokumentaatio/Plots/Graph_Search_Plot.png)
 
+Kuvaajan merkitsemät tulokset ovat 20 satunnaisen kartan keskiarvot. Jokainen testi tehtiin kaksi kertaa, joten reitinhauille on kaksi eri käyrää.
+
 Kuten kuvaajasta näkee, selvästikin A* on nopeampi kuin BFS tai DFS. Tämä ei ole yllättävää, sillä aikavaativuuskin on huomattavasti parempi. Solmulla on kuitenkin keskimäärin kolme tutkittavaa naapuria. DFS on kuitenkin selkeästi nopeampi kuin BFS isoilla kartoilla,
 vaikka pahimman tapauksen aikavaativuus on sama. Jollain kerroilla DFS saattaa olla jopa Astaria nopeampi, riippuen seinien sijoittelusta.
 
