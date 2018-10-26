@@ -1,5 +1,7 @@
 # Test Coverage
 
+Graphical User Interface is not tested, which drops the overall test coverage.
+
 ## Jacoco test report 
 
 | Package  | Coverage | 
