@@ -7,6 +7,17 @@ BFS tai A* -algoritmilla. Testauksessa käyttäjältä jälleen kysytään karta
 ja hylkää, mikäli karttaa ei voi läpäistä. Hakualgoritmit tehdään kartoille annetun määrän kertoja, jonka jälkeen niiden kestojen
 keskiarvot tulostetaan konsoliin.
 
+### Reitinhaut:
+BFS, DFS ja Astar toimivat samalla pohjalla, eli tietorakenteesta otetaan solmu, lisätään sen naapurit tietorakenteeseen. Läpikäynti loppuu, kun jokin naapureista on maali tai tietorakenne on tyhjä. Tyhjä tietorakenne tarkoittaa, ettei löydy
+polkua aloituksen ja maalin väliltä. Tietorakenteena DFS käyttää pinoa, BFS jonoa ja Astar minimikekoa.
+
+### Tietorakenteet:
+* Pino on taulukko, jonka viimeisin käytetty indeksi pidetään muuttujassa i. Kun lisätään uusi, kasvatetaan i:tä ja sijoitetaan alkio indeksiin i. Kun poistetaan, otetaan indeksistä i, ja vähennetään indeksiä yhdellä. Jos pino täyttyy, luodaan uusi taulukko, joka on kaksi kertaa suurempi, ja kopioidaan vanhat alkiot sinne. Mikäli poistaessa käytetty osuus on yksi neljäsosa taulukon koosta ja taulukon koko on yli kahdeksan, puolitetaan taulukon koko.
+
+* Jono on taulukko, jossa pidetään tietoa sekä alkuindeksistä i sekä koosta s. Kun lisätään uusi, lisätään se indeksiin s, ja kasvatetaan s yhdellä. Kun poistetaan, otetaan alkio indeksistä i, ja kasvatetaan i yhdellä. Jos i = s, tiedetään että jono on tyhjä. Mikäli taulukon koko on yli kahdeksan, ja i = s, puolitetaan taulukko. Mikäli lisättäessä s kasvaa taulukon kokoiseksi, luodaan uusi taulukko, joka on kaksi kertaa isompi kuin alkuperäinen, ja kopioidaan alkiot siihen.
+
+* Minimikeko on taulukko, jossa pienin alkio on aina ensimmäisessä indeksissä. Kun taulukkoon lisätään uusi alkio, se laitetaan taulukon ensimmäiseen tyhjään kohtaan, ja tehdään heapify metodi, joka korjaa minimikeon. Tämä tarkoittaa, että pienin arvo nousee ensimmäiseksi. Kun keosta poistetaan arvo, lisätään keon viimeisestä indeksistä arvo päällimmäiseksi. Tehdään taas heapify, jotta keon rakenne pysyy ehjänä.
+
 ## Saavutetut aika- ja tilavaativuudet.
 
 Karttoja luodaan kaksi, sekä GUI:n piirtämä, että hakuun käytettävä. Tilavaativuus on täten O(n^2) molemmille kartoille, eli 
