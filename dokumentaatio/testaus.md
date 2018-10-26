@@ -1,18 +1,38 @@
-# Testaus
+# Test Coverage
 
-## jacoco test report 
+## Jacoco test report 
 
-Class           Coverage  
+| Package  | Coverage | 
+| ------------- | ------------- | 
+| domain  | 51%  | 
+| searchalgos  | 54% | 
+| gui | 0% | 
+| datastructures | 79% | 
 
-Graph           | 19% 
 
-SearchAlgos     | 44% 
+### Domain
 
-MyMouseListener | 17%
+| Class  | Coverage | 
+| ------------- | ------------- | 
+| Graph  | 40%  | 
+| MyMouseListener  | 10%  | 
+| Node | 99% | 
+| Path | 100%  | 
 
-Node            | 92% 
 
-Path            | 100%  
+### Search Algorithms
 
-Main            | 0% 
+| Class  | Coverage | 
+| ------------- | ------------- | 
+| GUISearchAlgos  | 0%  | 
+| TestCaller  | 0%  | 
+| SearchAlgos | 99% | 
+| SearchTester | 100%  | 
 
+### Data Structures
+
+| Class  | Coverage | 
+| ------------- | ------------- | 
+| BisiHeap  | 75%  | 
+| BisiQue  | 64%  | 
+| BisiStack | 99% | 
