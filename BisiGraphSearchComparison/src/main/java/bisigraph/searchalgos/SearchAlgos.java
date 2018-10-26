@@ -18,6 +18,12 @@ import bisigraph.domain.Path;
 // These functions are for later use, a base for a different kind of implemention.
 public class SearchAlgos {
 
+    /**
+     * Runs DFS on the given graph. Returns -1 if goal is not found, otherwise time taken to find goal.
+     * @param start
+     * @param goal
+     * @return
+     */
     public long DFS(Node start, Node goal) {
         long now = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
@@ -42,9 +48,15 @@ public class SearchAlgos {
                 }
             }
         }
-        return 0;
+        return -1;
     }
 
+    /**
+     * Runs BFS on the given graph. Returns -1 if goal is not found, otherwise time taken to find goal.
+     * @param start
+     * @param goal
+     * @return
+     */
     public long BFS(Node start, Node goal) {
         long now = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
@@ -65,9 +77,15 @@ public class SearchAlgos {
                 }
             }
         }
-        return 0;
+        return -1;
     }
 
+    /**
+     * Runs astar on the given graph. Returns -1 if goal is not found, otherwise time taken to find goal.
+     * @param Start
+     * @param Goal
+     * @return
+     */
     public long astar(Node start, Node goal) {
         long now = System.currentTimeMillis();
         BisiHeap que = new BisiHeap(goal);
@@ -77,7 +95,6 @@ public class SearchAlgos {
             p = que.poll();
             Node[] neighbors = p.getNode().getNeighbors();
             for (Node n : neighbors) {
-
                 if (n != null && !n.visited()) {
                     if (n.equals(goal)) {
                         return System.currentTimeMillis() - now;
@@ -89,7 +106,7 @@ public class SearchAlgos {
 
             }
         }
-        return 0;
+        return -1;
     }
 
 }

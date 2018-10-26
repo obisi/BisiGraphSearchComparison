@@ -37,10 +37,6 @@ public class MyMouseListener extends MouseAdapter {
            }
        }
    }
-   
-    /**
-     * Sets all boolean valued controls to false
-     */
 
    
     /**

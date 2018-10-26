@@ -19,6 +19,9 @@ public class BisiQueue {
     
     @Override
     public String toString() {
+        if (isEmpty()) {
+            return "BisiQue:[]";
+        }
         String s = "";
         for (int i = 0; i < que.length; i++) {
             if (que[i] == null) {

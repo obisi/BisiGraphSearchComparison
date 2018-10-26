@@ -15,6 +15,9 @@ public class BisiStack {
 
     @Override
     public String toString() {
+        if (isEmpty()) {
+            return "BisiStack:[]";
+        }
         String s = "";
         for(int i = 0; i<stack.length; i++){
             if(stack[i] == null){
@@ -48,7 +51,7 @@ public class BisiStack {
         stack[size] = p;
         if(size == stack.length-1){
             Path[] temp = new Path[stack.length * 2];
-            for(int i = 0; i<size; i++){
+            for(int i = 0; i<=size; i++){
                 temp[i] = stack[i];
             }
             stack = temp;

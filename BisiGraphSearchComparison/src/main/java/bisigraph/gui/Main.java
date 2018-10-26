@@ -50,7 +50,10 @@ public class Main {
         });
 
     }
-
+    
+    // safe int input
+    
+    
     private static int getInt(String line) {
         Scanner sc = new Scanner(System.in);
         System.out.println(line);

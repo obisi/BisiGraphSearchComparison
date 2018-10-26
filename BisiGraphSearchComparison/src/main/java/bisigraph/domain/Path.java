@@ -62,7 +62,7 @@ public class Path {
     }
     
     /**
-     * Compares travelled distance or distance to given node with another Path object. Required for min heap. *DOES NOT WORK PROPERLY*
+     * Compares travelled distance or distance to given node with another Path object. Required for min heap.
      * @param p Path to which this path is compared to
      * @param n Node where distance is calculated to
      * @return +, - or 0 whether goal is closer given travelled distance.

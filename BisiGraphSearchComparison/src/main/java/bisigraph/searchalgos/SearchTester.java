@@ -15,16 +15,20 @@ import java.util.Random;
 public class SearchTester {
 
     private Node[][] graph;
-    private int[][] walls;
     private SearchAlgos algos;
 
+    /**
+     * Builds a new graph with given height and width. If the graph is unsolvable with astar, discard and build a new one.
+     * @param width
+     * @param height
+     */
     public SearchTester(int gW, int gH) {
 
         algos = new SearchAlgos();
         
-        long i = 0;
+        long i = -1;
         int j = 0;
-        while(i == 0){
+        while(i == -1){
             buildGraph(gW, gH);
             i = testAstar();
             j++;
@@ -32,12 +36,15 @@ public class SearchTester {
         System.out.println("Succeeded in building a solvable map on the " + j + ". try");
     }
     
-    public void buildGraph(int gW, int gH) {
+    /**
+     * Builds a new graph
+     * @param Width
+     * @param Height
+     */
+    private void buildGraph(int gW, int gH) {
         
         this.graph = new Node[gW][gH];
-        int walls = (gW * gH) / 3;
-        
-        
+
         for (int i = 0; i < gW; i++) {
             for (int j = 0; j < gH; j++) {
                 graph[i][j] = new Node(i, j);
@@ -54,7 +61,10 @@ public class SearchTester {
         setNeighbors();
     }
 
-    public void setNeighbors() {
+    /**
+     * Sets neightbors for the nodes in graph
+     */
+    private void setNeighbors() {
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph[0].length; j++) {
                 if (!graph[i][j].isWall()) {
@@ -75,7 +85,10 @@ public class SearchTester {
             }
         }
     }
-
+    
+    // Builds a copy of the graph. Used, so that the search algos each can use their own graph. 
+    // Reseting the original would have worked also.
+    
     private Node[][] getGraph() {
         Node[][] cG = new Node[graph.length][graph[0].length];
         for (int i = 0; i < graph.length; i++) {
@@ -102,18 +115,30 @@ public class SearchTester {
         return cG;
     }
 
+    /**
+     * Runs astar on the copied graph. Returns -1 if graph is unsolvable, otherwise time taken in ms.
+     * @return -1 for unsolvable or time taken.
+     */
     public long testAstar() {
         Node[][] g = getGraph();
         return algos.astar(g[0][0], g[g.length-1][g[0].length-1]);
 
     }
 
+    /**
+     * Runs DFS on the copied graph. Returns -1 if graph is unsolvable, otherwise time taken in ms.
+     * @return  -1 for unsolvable or time taken.
+     */
     public long testDFS() {
         Node[][] g = getGraph();
         return algos.DFS(g[0][0], g[g.length-1][g[0].length-1]);
 
     }
 
+    /**
+     * Runs BFS on the copied graph. Returns -1 if graph is unsolvable, otherwise time taken in ms.
+     * @return  -1 for unsolvable or time taken.
+     */
     public long testBFS() {
         Node[][] g = getGraph();
         return algos.BFS(g[0][0], g[g.length-1][g[0].length-1]);

@@ -21,6 +21,14 @@ import java.awt.GridLayout;
  */
 public class GUISearchAlgos {
 
+    /**
+     *
+     * @param myLabels
+     * @param graph
+     * @param start
+     * @param goal
+     * @return
+     */
     public Path DFS(JLabel[][] myLabels, Node[][] graph, Node start, Node goal) {
         long startTime = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
@@ -55,6 +63,14 @@ public class GUISearchAlgos {
         return null;
     }
 
+    /**
+     *
+     * @param myLabels
+     * @param graph
+     * @param start
+     * @param goal
+     * @return
+     */
     public Path BFS(JLabel[][] myLabels, Node[][] graph, Node start, Node goal) {
         long startTime = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
@@ -87,6 +103,14 @@ public class GUISearchAlgos {
         return null;
     }
 
+    /**
+     *
+     * @param myLabels
+     * @param graph
+     * @param start
+     * @param goal
+     * @return
+     */
     public Path astar(JLabel[][] myLabels, Node[][] graph, Node start, Node goal) {
         long startTime = System.currentTimeMillis();
         Path path = new Path(start, null, 0);
@@ -94,7 +118,6 @@ public class GUISearchAlgos {
         BisiHeap que = new BisiHeap(goal);
         que.add(path);
         while (!que.isEmpty()) {
-            System.out.println(que);
             Path p = que.poll();
             int[] xy = p.getNode().getXY();
             myLabels[xy[0]][xy[1]].setBackground(p.getNode().getColor());

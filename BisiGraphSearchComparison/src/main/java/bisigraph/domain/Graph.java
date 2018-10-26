@@ -92,10 +92,6 @@ public class Graph extends JPanel {
         }
     }
 
-    public int getCellWidth() {
-        return myLabels[0][0].getWidth();
-    }
-
     public int getGraphWidth() {
         return myLabels.length;
     }
@@ -176,7 +172,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Clicked node if turned into goal node, if goal selection is on
+     * Clicked node is turned into a goal node, if goal selection is on
      *
      * @param label
      */
@@ -200,7 +196,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Clicked node if turned into start node, if start selection is on
+     * Clicked node is turned into a start node, if start selection is on
      *
      * @param label
      */
@@ -224,7 +220,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Clicked node if turned into wall node, if wall selection is on
+     * Clicked node is turned into a wall node, if wall selection is on
      *
      * @param label
      */
@@ -242,7 +238,7 @@ public class Graph extends JPanel {
     }
 
     /**
-     * Clicked node if turned into empty node, if empty selection is on
+     * Clicked node is turned into an empty node, if empty selection is on
      *
      * @param label
      */
