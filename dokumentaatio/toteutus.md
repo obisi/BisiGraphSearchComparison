@@ -16,7 +16,7 @@ polkua aloituksen ja maalin väliltä. Tietorakenteena DFS käyttää pinoa, BFS
 
 * Jono on taulukko, jossa pidetään tietoa sekä alkuindeksistä i sekä koosta s. Kun lisätään uusi, lisätään se indeksiin s, ja kasvatetaan s yhdellä. Kun poistetaan, otetaan alkio indeksistä i, ja kasvatetaan i yhdellä. Jos i = s, tiedetään että jono on tyhjä. Mikäli taulukon koko on yli kahdeksan, ja i = s, puolitetaan taulukko. Mikäli lisättäessä s kasvaa taulukon kokoiseksi, luodaan uusi taulukko, joka on kaksi kertaa isompi kuin alkuperäinen, ja kopioidaan alkiot siihen.
 
-* Minimikeko on taulukko, jossa pienin alkio on aina ensimmäisessä indeksissä. Kun taulukkoon lisätään uusi alkio, se laitetaan taulukon ensimmäiseen tyhjään kohtaan, ja tehdään heapify metodi, joka korjaa minimikeon. Tämä tarkoittaa, että pienin arvo nousee ensimmäiseksi. Kun keosta poistetaan arvo, lisätään keon viimeisestä indeksistä arvo päällimmäiseksi. Tehdään taas heapify, jotta keon rakenne pysyy ehjänä.
+* Minimikeko on taulukko, jossa pienin alkio on aina ensimmäisessä indeksissä. Kun taulukkoon lisätään uusi alkio, se laitetaan taulukon ensimmäiseen tyhjään kohtaan, ja tehdään heapify metodi, joka korjaa minimikeon. Tämä tarkoittaa, että pienin arvo nousee ensimmäiseksi. Poisto-operaatiossa keon ensimmäinen, eli pienin arvo, palautetaan. Ensimmäiseen indeksiin sijoitetaan keon viimeisestä indeksistä löytyvä arvo. Tehdään taas heapify, jotta keon rakenne pysyy ehjänä, ja pienin siirtyy ensimmäiseen indeksiin.
 
 ## Saavutetut aika- ja tilavaativuudet.
 
